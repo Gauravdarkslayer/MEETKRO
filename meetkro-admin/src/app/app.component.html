@@ -1,0 +1,12 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<div id="wrapper">
+  <span *ngIf="visibility">
+    <app-leftbar></app-leftbar>
+    <app-header></app-header>
+    <div class="clearfix"></div>
+  </span>
+  <router-outlet></router-outlet>
+   <span *ngIf="visibility">
+    <app-footer></app-footer>
+  </span>
+</div>

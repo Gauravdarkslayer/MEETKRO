@@ -1,0 +1,125 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Content</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#addBlogModal">Add Content</button>                                    
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table datatable [dtOptions]="dtOptions" style="width: 100%;"
+                            class="table table-bordered dataTable">
+                        </table>
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="addBlogModal" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form role="form" [formGroup]="blogAddForm" (ngSubmit)="blogAddForm.valid && addBlog()">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Content</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="#addBlogModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Page</label>
+                        <select class="form-select" formControlName="page">
+                            <option value="" >Select page</option>
+                            <option value="competition">competition</option>
+                            <option value="home">home</option>
+                            <option value="giving">giving</option>
+                            <option value="calender">calender</option>
+                        </select>
+                        <div *ngIf="blogAddForm.get('page')!.errors && isSubmitted">
+                            <span *ngIf="blogAddForm.get('page')!.errors!['required']" class="text-danger">Required!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Write Your Content</label>
+                        <angular-editor id="editor1" [config]="editorConfig" formControlName="description">
+                        </angular-editor>
+                        <div *ngIf="blogAddForm.get('description')!.errors && isSubmitted">
+                            <span *ngIf="blogAddForm.get('description')!.errors!['required']"
+                                class="text-danger">Required!
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" (click)="isSubmitted=true;" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="editBlogModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form role="form" [formGroup]="blogEditForm" (ngSubmit)="blogEditForm.valid && updateBlog()">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Content</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="#editBlogModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Page</label>
+                        <select class="form-select" formControlName="page">
+                            <option value="" >Select page</option>
+                            <option value="competition">competition</option>
+                            <option value="home">home</option>
+                            <option value="giving">giving</option>
+                            <option value="calender">calender</option>
+                        </select>
+                        <div *ngIf="blogEditForm.get('page')!.errors && isSubmitted">
+                            <span *ngIf="blogEditForm.get('page')!.errors!['required']" class="text-danger">Required!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Write Your Content</label>
+                        <angular-editor id="editor1" [config]="editorConfig" formControlName="description">
+                        </angular-editor>
+                        <div *ngIf="blogEditForm.get('description')!.errors && isSubmitted">
+                            <span *ngIf="blogEditForm.get('description')!.errors!['required']"
+                                class="text-danger">Required!
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" (click)="isSubmitted=true;" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

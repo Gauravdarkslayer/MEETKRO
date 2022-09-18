@@ -1,0 +1,1 @@
+export const MINUTES_UNIT = 'Min.';

@@ -1,0 +1,66 @@
+<div class="auth-page">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-xxl-12 col-lg-12 col-md-12">
+                <div class="auth-full-page-content d-flex p-sm-5 p-4 card">
+                    <div class="w-100">
+                        <div class="d-flex flex-column h-100">
+                            <div class="auth-content my-auto">
+                                <div class="text-center">
+                                    <h2>Meet Karo - Admin</h2>
+                                    <h5 class="mb-0">Welcome Back !</h5>
+                                    <p class="text-muted mt-2">Sign in to continue</p>
+                                </div>
+                                <form class="mt-4 pt-2" [formGroup]="loginForm" (ngSubmit)="loginForm.valid && login()" novalidate>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="text" class="form-control" name="email" formControlName="email" placeholder="Email"
+                                        required="">
+                                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                        
+                                    </div>
+                                    <div *ngIf="loginForm.get('email')!.errors && submitted">
+                                        <span *ngIf="loginForm.get('email')!.errors!['required'] && submitted" class="text-danger">Email is
+                                            Required!</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-start">
+                                            <div class="flex-grow-1">
+                                                <label class="form-label">Password</label>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <div>
+                                                    <a [routerLink]="['/forget-password']"  class="text-muted">Forgot password?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="input-group auth-pass-inputgroup">
+                                            <input type="password" class="form-control" name="password" formControlName="password"
+                                            placeholder="Password" required="" aria-label="Password" aria-describedby="password-addon">
+                                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="loginForm.get('password')!.errors && submitted">
+                                        <span *ngIf="loginForm.get('password')!.errors!['required'] && submitted" class="text-danger">Password is
+                                            Required!</span>
+                                    </div>
+                                    
+                                   
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit" (click)="submitted=true;">Log In</button>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- end auth full page content -->
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container fluid -->
+</div>

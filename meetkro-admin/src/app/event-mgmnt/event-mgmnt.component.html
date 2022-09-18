@@ -1,0 +1,117 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Slots Management</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center">Add Slot</button>                                    
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="table-heading">Upcoming Slots</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <table datatable [dtOptions]="dtOptions" style="width: 100%;"
+                            class="table table-bordered dataTable">
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-center" id="addEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Schedule Slots</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form role="form" [formGroup]="eventAddForm" (ngSubmit)="eventAddForm.valid && scheduleSlot()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="form-label" for="formrow-agenda-input" >Agenda</label>
+                            <input style="margin-bottom: 20px;" type="text" class="form-control" id="formrow-agenda-input" name="slotsAgenda" formControlName="slotsAgenda">
+                            <div *ngIf="eventAddForm.get('slotsAgenda')!.errors && isSubmitted">
+                                <span *ngIf="eventAddForm.get('slotsAgenda')!.errors!['required']" class="text-danger">Required!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="form-label" for="formrow-max-members-input" >Max Allowed Members</label>
+                            <input style="margin-bottom: 20px;" type="number" class="form-control" id="formrow-max_members-input" name="max_members" formControlName="max_members">
+                            <div *ngIf="eventAddForm.get('max_members')!.errors && isSubmitted">
+                                <span *ngIf="eventAddForm.get('max_members')!.errors!['required']" class="text-danger">Required!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-md-6">
+                            <label class="form-label" for="formrow-firstname-input" >Slot Start Time</label>
+                            <input type="datetime-local" class="form-control" id="formrow-start-time-input" name="slotStartDatetime" formControlName="slotStartDatetime">
+                            <div *ngIf="eventAddForm.get('slotStartDatetime')!.errors && isSubmitted">
+                                <span *ngIf="eventAddForm.get('slotStartDatetime')!.errors!['required']" class="text-danger">Required!
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="formrow-email-input">Slot End Time</label>
+                            <input type="datetime-local" class="form-control" id="formrow-end-time-input" name="slotEndDatetime" formControlName="slotEndDatetime">
+                            <div *ngIf="eventAddForm.get('slotEndDatetime')!.errors && isSubmitted">
+                                <span *ngIf="eventAddForm.get('slotEndDatetime')!.errors!['required']" class="text-danger">Required!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="formrow-slot-interval-input" >Meeting ID</label>
+                        <input type="text" placeholder="meeting_id" class="form-control" id="formrow-end-time-input" name="meeting_id" formControlName="meeting_id">
+                            <div *ngIf="eventAddForm.get('meeting_id')!.errors && isSubmitted">
+                            <span *ngIf="eventAddForm.get('meeting_id')!.errors!['required']" class="text-danger">Required!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="formrow-slot-interval-input" >Slot Interval</label>
+
+                        <ng-multiselect-dropdown
+                            [placeholder]="'Slot Interval'"
+                            [settings]="dropdownSettings"
+                            [data]="slotItems"
+                            name="slotInterval"
+                            formControlName="slotInterval">
+                        </ng-multiselect-dropdown>
+
+                        <div *ngIf="eventAddForm.get('slotInterval')!.errors && isSubmitted">
+                            <span *ngIf="eventAddForm.get('slotInterval')!.errors!['required']" class="text-danger">Required!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary w-md" (click)="isSubmitted=true">Schedule Slots</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
